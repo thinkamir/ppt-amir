@@ -1,0 +1,75 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1E2A4A"/>
+      <stop offset="1" stop-color="#243B6B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#60A5FA"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" rx="32" fill="url(#bg)"/>
+  <circle cx="1160" cy="120" r="180" fill="#38BDF8" fill-opacity="0.08"/>
+  <circle cx="160" cy="640" r="220" fill="#14B8A6" fill-opacity="0.08"/>
+
+  <text x="72" y="92" fill="white" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">ppt-amir</text>
+  <text x="72" y="132" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif" font-size="22">WorkBuddy wrapper for ppt-master</text>
+  <text x="72" y="180" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">从 brief 到 SVG 草稿页，再衔接上游 ppt-master 导出可编辑 PPTX</text>
+
+  <rect x="72" y="228" width="1136" height="196" rx="28" fill="url(#card)" filter="url(#shadow)"/>
+  <text x="112" y="278" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Pipeline Overview</text>
+
+  <g font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <rect x="112" y="312" width="172" height="68" rx="18" fill="#0F172A" stroke="#334155"/>
+    <text x="198" y="339" fill="#7DD3FC" font-size="16">Input</text>
+    <text x="198" y="364" fill="white" font-size="20" font-weight="600">Brief / URL</text>
+
+    <rect x="336" y="312" width="172" height="68" rx="18" fill="#0F172A" stroke="#334155"/>
+    <text x="422" y="339" fill="#7DD3FC" font-size="16">Planning</text>
+    <text x="422" y="364" fill="white" font-size="20" font-weight="600">Slides / Notes</text>
+
+    <rect x="560" y="312" width="172" height="68" rx="18" fill="#0F172A" stroke="#334155"/>
+    <text x="646" y="339" fill="#7DD3FC" font-size="16">Draft</text>
+    <text x="646" y="364" fill="white" font-size="20" font-weight="600">SVG Tasks</text>
+
+    <rect x="784" y="312" width="172" height="68" rx="18" fill="#0F172A" stroke="#334155"/>
+    <text x="870" y="339" fill="#7DD3FC" font-size="16">Render</text>
+    <text x="870" y="364" fill="white" font-size="20" font-weight="600">SVG Pages</text>
+
+    <rect x="1008" y="312" width="160" height="68" rx="18" fill="url(#accent)"/>
+    <text x="1088" y="339" fill="#082F49" font-size="16">Export</text>
+    <text x="1088" y="364" fill="#082F49" font-size="20" font-weight="700">Editable PPTX</text>
+  </g>
+
+  <g stroke="#94A3B8" stroke-width="4" stroke-linecap="round">
+    <path d="M286 346H328"/>
+    <path d="M510 346H552"/>
+    <path d="M734 346H776"/>
+    <path d="M958 346H998"/>
+  </g>
+
+  <rect x="72" y="460" width="540" height="188" rx="28" fill="#0F172A" stroke="#334155" filter="url(#shadow)"/>
+  <text x="108" y="512" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">What this repo adds</text>
+  <g fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">
+    <text x="112" y="556">• WorkBuddy skill / agent 封装</text>
+    <text x="112" y="590">• 统一 run_pipeline.py 入口</text>
+    <text x="112" y="624">• 最小示例项目与文档骨架</text>
+  </g>
+
+  <rect x="652" y="460" width="556" height="188" rx="28" fill="#0F172A" stroke="#334155" filter="url(#shadow)"/>
+  <text x="688" y="512" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Suggested output story</text>
+  <g fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">
+    <text x="692" y="556">1. Cover / agenda / key message</text>
+    <text x="692" y="590">2. Comparison / process / KPI / matrix slides</text>
+    <text x="692" y="624">3. Finalize via upstream ppt-master</text>
+  </g>
+</svg>

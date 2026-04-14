@@ -31,7 +31,33 @@ flowchart LR
     F --> G[Editable PPTX]
 ```
 
+## 仓库预览
+
+下面这张图不是最终 PPT 截图，而是这个仓库当前封装层的流程示意图，适合放在 GitHub 首页第一屏，帮人快速理解它到底做了什么：
+
+![ppt-amir repo preview](assets/repo-preview.svg)
+
+## 示例输出会长什么样
+
+当前仓库内置的是“最小可用输入”和“流程封装”，不是直接附带一堆导出的 PPT 成品。但你可以把最终结果大致理解成下面这条链路：
+
+1. `brief / URL / markdown / docx`
+2. 生成 `design_spec.md`、`notes/outline.md`、`slides.md`
+3. 生成 `tasks/*.md`
+4. 渲染 `svg-pages/*.svg`
+5. 交给上游 `ppt-master` 输出可编辑 PPTX
+
+比较典型的一套输出会包含：
+
+- 封面页 / 章节页
+- 对比页 / 流程页 / 时间线页
+- KPI 页 / 数据高亮页 / 矩阵页
+- 最终汇总页或结论页
+
+如果你只是想快速验证链路是否通了，建议先跑最小示例项目，看到 `slides.md`、`tasks/`、`svg-pages/` 这几层顺利生成，再去接最终导出。这样更稳，也更少被上游依赖教育做人。
+
 ## 仓库包含什么
+
 
 
 - `skills/ppt-master/`
@@ -176,10 +202,17 @@ python skills/ppt-master/scripts/run_pipeline.py --repo C:\path\to\ppt-master fi
 - `examples/minimal-project/sources/brief.md`
 - `examples/minimal-project/notes/outline.md`
 
+你可以把它当成一个最小 smoke case：
+- `minimal-brief.json` 负责演示结构化输入长什么样
+- `minimal-project/` 负责演示项目初始化后的最小骨架
+- 如果后续顺利生成出 `slides.md`、`tasks/*.md`、`svg-pages/*.svg`，就说明这层封装基本接通了
+
 适合拿来快速理解：
 - brief 长什么样
 - 项目初始化后目录大致长什么样
 - 演示内容在进入 `slides.md` 前应该如何组织
+- 最小示例跑通后，中间产物会落在哪几层目录
+
 
 ## 推荐使用方式
 
