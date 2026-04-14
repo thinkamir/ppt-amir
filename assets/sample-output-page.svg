@@ -1,0 +1,66 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="200%" height="200%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" rx="28" fill="url(#bg)"/>
+  <circle cx="1110" cy="96" r="180" fill="#60A5FA" fill-opacity="0.14"/>
+  <circle cx="156" cy="646" r="220" fill="#22C55E" fill-opacity="0.10"/>
+
+  <text x="84" y="86" fill="#93C5FD" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="1.6">CONSULTING THEME / SAMPLE SVG PAGE</text>
+  <text x="84" y="154" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="800">AI 客服项目季度复盘</text>
+  <text x="84" y="204" fill="#DBEAFE" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="500">这是一个示意性的输出页，用来展示仓库最终能生成怎样的演示页风格。</text>
+
+  <g filter="url(#shadow)">
+    <rect x="84" y="258" width="528" height="364" rx="28" fill="url(#card)" stroke="#BFDBFE" stroke-opacity="0.22"/>
+    <text x="118" y="308" fill="#E0F2FE" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">关键结论</text>
+    <text x="118" y="366" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="78" font-weight="800">+38%</text>
+    <text x="118" y="408" fill="#BFDBFE" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="600">自动化解决率提升</text>
+
+    <rect x="118" y="450" width="460" height="18" rx="9" fill="#1E3A8A" fill-opacity="0.55"/>
+    <rect x="118" y="450" width="350" height="18" rx="9" fill="#60A5FA"/>
+    <text x="118" y="503" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="20">上线前后 90 天对比，机器人自助闭环显著增强。</text>
+
+    <g>
+      <circle cx="132" cy="552" r="6" fill="#86EFAC"/>
+      <text x="150" y="559" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="20">工单首次响应时间从 11 分钟缩短至 4 分钟</text>
+    </g>
+    <g>
+      <circle cx="132" cy="592" r="6" fill="#86EFAC"/>
+      <text x="150" y="599" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="20">夜间值守压力下降，人工峰值班次减少 2 组</text>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="652" y="258" width="544" height="170" rx="28" fill="url(#card)" stroke="#BFDBFE" stroke-opacity="0.22"/>
+    <text x="686" y="308" fill="#E0F2FE" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">三项指标</text>
+
+    <text x="686" y="362" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="800">92%</text>
+    <text x="686" y="392" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">满意度</text>
+
+    <text x="866" y="362" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="800">-41%</text>
+    <text x="866" y="392" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">重复咨询</text>
+
+    <text x="1046" y="362" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="800">7 天</text>
+    <text x="1046" y="392" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">上线迭代周期</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="652" y="452" width="544" height="170" rx="28" fill="url(#card)" stroke="#BFDBFE" stroke-opacity="0.22"/>
+    <text x="686" y="502" fill="#E0F2FE" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">页面结构感</text>
+    <text x="686" y="548" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">左侧大结论 + 右侧指标卡 + 底部说明</text>
+    <text x="686" y="588" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">这类构图适合 KPI 高亮、阶段复盘、策略建议、路演单页结论。</text>
+  </g>
+
+  <text x="84" y="676" fill="#BFDBFE" font-family="Segoe UI, Arial, sans-serif" font-size="16">Generated as a repository showcase asset for ppt-amir. Not a final exported PPT page.</text>
+</svg>
