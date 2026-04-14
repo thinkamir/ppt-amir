@@ -148,14 +148,11 @@ cd ppt-master
 pip install -r requirements.txt
 ```
 
-更新仓库：
+准备并检查上游仓库：
 ```bash
-python skills/ppt-master/scripts/update_repo.py
-```
-
-查看图片生成后端：
-```bash
-python skills/ppt-master/scripts/image_gen.py --list-backends
+git clone https://github.com/hugohe3/ppt-master.git
+cd ppt-master
+pip install -r requirements.txt
 ```
 
 生成项目脚手架与 `design_spec.md` 模板：

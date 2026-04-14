@@ -65,17 +65,9 @@ cd ppt-master
 pip install -r requirements.txt
 ```
 
-更新本地仓库：
+说明：当前仓库只提供 WorkBuddy 封装层与包装脚本；`update_repo.py`、`image_gen.py` 等能力应以你实际准备的上游 `ppt-master` 仓库为准。
 
-```bash
-python skills/ppt-master/scripts/update_repo.py
-```
-
-查看支持的图片后端：
-
-```bash
-python skills/ppt-master/scripts/image_gen.py --list-backends
-```
+如果你要启用图片生成后端，请按上游仓库的 README 和脚本说明配置相应环境变量。
 
 ## WorkBuddy 接入建议
 - 如果只是做方案和页面规划，可以先不安装全部依赖

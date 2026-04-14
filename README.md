@@ -1,10 +1,24 @@
 # ppt-amir
 
-将 `hugohe3/ppt-master` 转成可在 WorkBuddy 中直接使用的完整仓库封装，包含：
+把 `hugohe3/ppt-master` 整理成一个更适合 WorkBuddy 使用的完整仓库，包含可直接复用的 skill、agent、参考文档、执行脚本，以及一个最小可用示例项目。
 
-- `skills/ppt-master/`：WorkBuddy skill 定义、参考文档与执行脚本
-- `agents/`：PPT 生成 agent 定义与使用说明
-- `skills/ppt-master/scripts/run_pipeline.py`：统一入口，串行组织 scaffold / bundle / slides / notes / svg-tasks / svg-pages / finalize 等阶段
+> 这不是上游 `ppt-master` 的替代品，而是它的 WorkBuddy 封装层。
+> 真正导出 SVG/PPTX 时，仍然需要你准备好上游 `ppt-master` 仓库和依赖环境。
+
+## 仓库包含什么
+
+- `skills/ppt-master/`
+  - `SKILL.md`：WorkBuddy skill 定义
+  - `references/`：使用说明、环境配置、执行接线、脚手架、SVG 阶段文档
+  - `scripts/`：统一入口与中段生成脚本
+- `agents/`
+  - `ppt-master-agent.md`：演示文稿生产代理定义
+  - `references/`：agent 使用与执行说明
+- `examples/`
+  - `minimal-brief.json`：最小结构化 brief 示例
+  - `minimal-project/`：最小可用项目示例
+- `LICENSE`
+  - 默认使用 MIT License
 
 ## 仓库结构
 
@@ -13,55 +27,170 @@ ppt-amir/
   agents/
     ppt-master-agent.md
     references/
+  examples/
+    minimal-brief.json
+    minimal-project/
+      design_spec.md
+      notes/
+        outline.md
+      sources/
+        brief.md
   skills/
     ppt-master/
       SKILL.md
       references/
       scripts/
+  LICENSE
+  README.md
 ```
 
 ## 主要能力
 
-- 将 PDF、DOCX、URL、Markdown、纯文本等内容转为可编辑 PPTX 的工作流说明
-- 通过 WorkBuddy agent 驱动演示文稿生产链路
+### 1. WorkBuddy skill 封装
+- 将 PDF、DOCX、URL、Markdown、纯文本等内容转成可编辑 PPTX 的完整流程说明
 - 支持项目脚手架、brief 打包、slides 规划、notes 汇总、SVG 任务单生成与 SVG 草稿页生成
-- 支持主题系统与组件级视觉差异扩展
+- 保留对上游 `ppt-master` 工作流的兼容性
+
+### 2. WorkBuddy agent 封装
+- 用 agent 驱动演示文稿生产链路
+- 强制按“需求确认 -> 设计规范 -> 中段生成 -> SVG -> PPTX”推进
+- 适合做商务汇报、路演 deck、课程讲义、营销图文、知识卡片
+
+### 3. 中段流水线脚本
+统一入口：
+
+```bash
+python skills/ppt-master/scripts/run_pipeline.py
+```
+
+支持的阶段包括：
+- `check`
+- `scaffold`
+- `bundle`
+- `slides`
+- `notes`
+- `svg-tasks`
+- `svg-pages`
+- `init`
+- `import`
+- `validate`
+- `finalize`
+- `run`
+
+### 4. 草稿页增强能力
+内置：
+- 版式识别
+- 页级文案改写
+- subtitle / takeaway / supporting bullets 生成
+- 结构化版式字段
+- 文本压缩与轻量组件提示
+- 多主题系统：`default` / `dark` / `tech-blue` / `business-dark` / `brand-light` / `consulting`
+- 主题差异可下沉到 `chip`、`callout`、`cover`、`comparison`、`hero`、`kpi-grid`、`section-divider`、`data-highlight` 等组件层
+
+## 先决条件
+
+### 必需
+- Python 3.10+
+- 一个可访问的上游 `ppt-master` 仓库
+
+### 可选
+- Node.js 18+
+- Pandoc
+- Cairo / cairosvg
+- 图片生成 API Key（如果要启用 AI 生图）
+
+详细说明见：
+- `skills/ppt-master/references/setup.md`
+- `skills/ppt-master/references/execution-wiring.md`
 
 ## 快速开始
 
-### 1. 检查上游 `ppt-master` 仓库
+### 1. 准备上游仓库
+
+```bash
+git clone https://github.com/hugohe3/ppt-master.git
+cd ppt-master
+pip install -r requirements.txt
+```
+
+### 2. 检查封装层和上游仓库是否可用
 
 ```bash
 python skills/ppt-master/scripts/run_pipeline.py --repo C:\path\to\ppt-master check
 ```
 
-### 2. 创建项目脚手架
+### 3. 直接用最小示例 brief 生成项目包
 
 ```bash
-python skills/ppt-master/scripts/run_pipeline.py scaffold --project-root C:\work\ppt-jobs --project-name q3-report --format ppt169 --audience 投资人 --slide-count 10 --style 科技极简 --summary Q3业务汇报
+python skills/ppt-master/scripts/run_pipeline.py bundle --brief examples\minimal-brief.json --project-root C:\work\ppt-jobs --project-name demo-deck
 ```
 
-### 3. 生成项目包
+### 4. 继续执行中段和 SVG 草稿阶段
 
 ```bash
-python skills/ppt-master/scripts/run_pipeline.py bundle --brief C:\work\briefs\q3.json --project-root C:\work\ppt-jobs --project-name q3-report
-```
-
-### 4. 继续执行中段与 SVG 草稿阶段
-
-```bash
-python skills/ppt-master/scripts/run_pipeline.py slides --project-path C:\work\ppt-jobs\q3-report
-python skills/ppt-master/scripts/run_pipeline.py notes --project-path C:\work\ppt-jobs\q3-report
-python skills/ppt-master/scripts/run_pipeline.py svg-tasks --project-path C:\work\ppt-jobs\q3-report --create-svg-stubs
-python skills/ppt-master/scripts/run_pipeline.py svg-pages --project-path C:\work\ppt-jobs\q3-report --force
+python skills/ppt-master/scripts/run_pipeline.py slides --project-path C:\work\ppt-jobs\demo-deck
+python skills/ppt-master/scripts/run_pipeline.py notes --project-path C:\work\ppt-jobs\demo-deck
+python skills/ppt-master/scripts/run_pipeline.py svg-tasks --project-path C:\work\ppt-jobs\demo-deck --create-svg-stubs
+python skills/ppt-master/scripts/run_pipeline.py svg-pages --project-path C:\work\ppt-jobs\demo-deck --force --theme consulting
 ```
 
 ### 5. 最终导出
 
 ```bash
-python skills/ppt-master/scripts/run_pipeline.py --repo C:\path\to\ppt-master finalize --project-path C:\work\ppt-jobs\q3-report
+python skills/ppt-master/scripts/run_pipeline.py --repo C:\path\to\ppt-master finalize --project-path C:\work\ppt-jobs\demo-deck
 ```
 
-## 说明
+## 最小可用示例项目
 
-这个仓库是 WorkBuddy 封装层，不替代上游 `ppt-master` 本身。真正导出 PPTX 时，仍需要你准备好上游仓库和依赖环境。
+仓库自带：
+
+- `examples/minimal-brief.json`
+- `examples/minimal-project/design_spec.md`
+- `examples/minimal-project/sources/brief.md`
+- `examples/minimal-project/notes/outline.md`
+
+适合拿来快速理解：
+- brief 长什么样
+- 项目初始化后目录大致长什么样
+- 演示内容在进入 `slides.md` 前应该如何组织
+
+## 推荐使用方式
+
+### 场景 A：只做规划
+输出这些东西就够了：
+- `design_spec.md`
+- `notes/outline.md`
+- 下一步执行建议
+
+### 场景 B：一路跑到 PPTX
+建议顺序：
+1. `check`
+2. `scaffold` 或 `bundle`
+3. `slides`
+4. `notes`
+5. `svg-tasks`
+6. `svg-pages`
+7. `finalize`
+
+别一上来就 `finalize`，那样通常只会得到一个更快的报错。
+
+## 仓库清理说明
+
+这次整理时做了几件事：
+- 把可复用内容收敛成 `skills/`、`agents/`、`examples/` 三层结构
+- 补上 `LICENSE`
+- 去掉文档里对本仓库内不存在脚本的误导性调用说明，统一改成对上游仓库或统一入口脚本的描述
+- 保持仓库只承载 WorkBuddy 封装层，不把无关个人配置一起塞进来
+
+## 后续建议
+
+如果你要继续把这个仓库做得更像一个可分发项目，下一步我建议补这几个：
+- GitHub Releases
+- 中英文双语 README
+- 示例输出截图
+- 一份更完整的 `examples/demo-brief-enterprise.json`
+- 自动检查脚本可用性的 CI
+
+## License
+
+MIT
