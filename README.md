@@ -1,11 +1,38 @@
 # ppt-amir
 
+![version](https://img.shields.io/badge/version-v0.1.0-blue)
+![license](https://img.shields.io/badge/license-MIT-green)
+![workflow](https://img.shields.io/badge/workflow-WorkBuddy%20wrapper-orange)
+
 把 `hugohe3/ppt-master` 整理成一个更适合 WorkBuddy 使用的完整仓库，包含可直接复用的 skill、agent、参考文档、执行脚本，以及一个最小可用示例项目。
 
 > 这不是上游 `ppt-master` 的替代品，而是它的 WorkBuddy 封装层。
 > 真正导出 SVG/PPTX 时，仍然需要你准备好上游 `ppt-master` 仓库和依赖环境。
 
+## 一眼看懂
+
+| 项目 | 说明 |
+| --- | --- |
+| 仓库定位 | `ppt-master` 的 WorkBuddy skill + agent + pipeline wrapper |
+| 适用场景 | 商务汇报、路演 deck、知识卡片、课程讲义、营销图文 |
+| 主要产物 | `SKILL.md`、agent 定义、pipeline 脚本、参考文档、最小示例 |
+| 是否直接替代上游 | 否，这里是封装层，不是完整渲染引擎本体 |
+| 上手方式 | 先准备上游 `ppt-master`，再用本仓库的统一入口驱动流程 |
+
+## 流程概览
+
+```mermaid
+flowchart LR
+    A[Brief / URL / Markdown / Doc] --> B[WorkBuddy Skill or Agent]
+    B --> C[design_spec / outline / slides / notes]
+    C --> D[svg-tasks]
+    D --> E[svg-pages]
+    E --> F[finalize_svg / svg_to_pptx]
+    F --> G[Editable PPTX]
+```
+
 ## 仓库包含什么
+
 
 - `skills/ppt-master/`
   - `SKILL.md`：WorkBuddy skill 定义
@@ -189,8 +216,22 @@ python skills/ppt-master/scripts/run_pipeline.py --repo C:\path\to\ppt-master fi
 - 中英文双语 README
 - 示例输出截图
 - 一份更完整的 `examples/demo-brief-enterprise.json`
-- 自动检查脚本可用性的 CI
+- 更细的脚本 smoke test 与示例产物校验
+
+## CI
+
+仓库已经带了一个最小 GitHub Actions：
+
+- `.github/workflows/repo-check.yml`
+
+当前会自动检查：
+- README / LICENSE / skill / agent / 示例文件是否存在
+- `run_pipeline.py --help` 是否可执行
+- 主要子命令的 `--help` 是否能正常输出
+
+这不是完整集成测试，但足够先防止仓库结构被改坏。
 
 ## License
+
 
 MIT

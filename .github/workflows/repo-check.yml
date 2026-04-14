@@ -1,0 +1,46 @@
+name: repo-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  repo-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify repository structure
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f agents/ppt-master-agent.md
+          test -f skills/ppt-master/SKILL.md
+          test -f skills/ppt-master/scripts/run_pipeline.py
+          test -f examples/minimal-brief.json
+          test -f examples/minimal-project/design_spec.md
+          test -f examples/minimal-project/sources/brief.md
+          test -f examples/minimal-project/notes/outline.md
+
+      - name: Check pipeline help output
+        run: |
+          python skills/ppt-master/scripts/run_pipeline.py --help
+
+      - name: Check pipeline subcommands
+        run: |
+          python skills/ppt-master/scripts/run_pipeline.py check --help
+          python skills/ppt-master/scripts/run_pipeline.py scaffold --help
+          python skills/ppt-master/scripts/run_pipeline.py bundle --help
+          python skills/ppt-master/scripts/run_pipeline.py slides --help
+          python skills/ppt-master/scripts/run_pipeline.py notes --help
+          python skills/ppt-master/scripts/run_pipeline.py svg-tasks --help
+          python skills/ppt-master/scripts/run_pipeline.py svg-pages --help
+          python skills/ppt-master/scripts/run_pipeline.py finalize --help
+          python skills/ppt-master/scripts/run_pipeline.py run --help
